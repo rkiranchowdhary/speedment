@@ -28,6 +28,7 @@ import com.speedment.component.PasswordComponent;
 import com.speedment.component.PrimaryKeyFactoryComponent;
 import com.speedment.component.ProjectComponent;
 import com.speedment.component.StreamSupplierComponent;
+import com.speedment.component.TransactionComponent;
 import com.speedment.component.TypeMapperComponent;
 import com.speedment.component.UserInterfaceComponent;
 import com.speedment.component.connectionpool.ConnectionPoolComponent;
@@ -190,5 +191,9 @@ public interface Speedment {
 
     default DocumentPropertyComponent getDocumentPropertyComponent() {
         return get(DocumentPropertyComponent.class);
+    }
+
+    default TransactionComponent getTransactionComponent() {
+        return get(TransactionComponent.class);
     }
 }

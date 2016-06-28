@@ -29,6 +29,7 @@ import com.speedment.component.PasswordComponent;
 import com.speedment.component.PrimaryKeyFactoryComponent;
 import com.speedment.component.ProjectComponent;
 import com.speedment.component.StreamSupplierComponent;
+import com.speedment.component.TransactionComponent;
 import com.speedment.component.TypeMapperComponent;
 import com.speedment.component.UserInterfaceComponent;
 import com.speedment.component.connectionpool.ConnectionPoolComponent;
@@ -47,6 +48,7 @@ import com.speedment.internal.core.platform.component.impl.PasswordComponentImpl
 import com.speedment.internal.core.platform.component.impl.PrimaryKeyFactoryComponentImpl;
 import com.speedment.internal.core.platform.component.impl.ProjectComponentImpl;
 import com.speedment.internal.core.platform.component.impl.ResultSetMapperComponentImpl;
+import com.speedment.internal.core.platform.component.impl.TransactionComponentImpl;
 import com.speedment.internal.core.platform.component.impl.TypeMapperComponentImpl;
 import com.speedment.internal.core.platform.component.impl.UserInterfaceComponentImpl;
 import com.speedment.internal.logging.Level;
@@ -80,6 +82,7 @@ final class SpeedmentImpl extends DefaultClassMapper<Component> implements Speed
     private PasswordComponent passwordComponent;
     private CodeGenerationComponent codeGenerationComponent;
     private DocumentPropertyComponent documentPropertyComponent;
+    private TransactionComponent transactionComponent;
 
     SpeedmentImpl() {
         logger = LoggerManager.getLogger(SpeedmentImpl.class);
@@ -97,6 +100,7 @@ final class SpeedmentImpl extends DefaultClassMapper<Component> implements Speed
         put(PasswordComponentImpl::new);
         put(CodeGenerationComponentImpl::new);
         put(DocumentPropertyComponentImpl::new);
+        put(TransactionComponentImpl::new);
     }
 
     @Override
@@ -165,6 +169,9 @@ final class SpeedmentImpl extends DefaultClassMapper<Component> implements Speed
         }
         if (item instanceof DocumentPropertyComponent) {
             documentPropertyComponent = castOrFail(item, DocumentPropertyComponent.class);
+        }
+        if (item instanceof TransactionComponent) {
+            transactionComponent = castOrFail(item, TransactionComponent.class);
         }
         return put(item, Component::getComponentClass);
     }
@@ -274,6 +281,11 @@ final class SpeedmentImpl extends DefaultClassMapper<Component> implements Speed
     @Override
     public DocumentPropertyComponent getDocumentPropertyComponent() {
         return documentPropertyComponent;
+    }
+    
+    @Override
+    public TransactionComponent getTransactionComponent() {
+        return transactionComponent;
     }
 
     @Override

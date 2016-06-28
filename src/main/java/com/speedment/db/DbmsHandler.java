@@ -24,6 +24,7 @@ import com.speedment.db.trait.HasCreateFromConnectionMethods;
 import com.speedment.field.trait.FieldTrait;
 import com.speedment.field.trait.ReferenceFieldTrait;
 import com.speedment.util.ProgressMeasure;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -96,6 +97,15 @@ public interface DbmsHandler extends HasCreateFromConnectionMethods {
         Predicate<String> filterCriteria
     );
 
+    
+    /**
+     * Returns a connection for the provided Dbms.
+     * 
+     * @param dbms to get connection form
+     * @return a connection for the provided Dbms
+     */
+    public Connection getConnection(Dbms dbms);
+    
     /**
      * Eagerly executes a SQL query and subsequently maps each row in the
      * ResultSet using a provided mapper and return a Stream of the mapped

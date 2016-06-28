@@ -914,7 +914,7 @@ public abstract class AbstractRelationalDbmsHandler implements DbmsHandler {
     }
 
     // Todo: Use DataSource instead: http://docs.oracle.com/javase/tutorial/jdbc/basics/sqldatasources.html
-    private Connection getConnection(Dbms dbms) {
+    public Connection getConnection(Dbms dbms) {
         final String url = DocumentDbUtil.findConnectionUrl(speedment, dbms);
         final String user = unwrap(dbms.getUsername());
         final char[] password = unwrap(speedment.getPasswordComponent().get(dbms));
